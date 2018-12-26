@@ -6,6 +6,8 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import (MessageEvent, TextMessage, TextSendMessage,
                             ImageMessage, )
 
+from cloudinary.uploader import upload
+
 CHANNEL_ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
 LINE_ACCESS_SECRET = os.environ["CHANNEL_SECRET"]
 
@@ -47,7 +49,22 @@ def handle_content_message(event):
             TextSendMessage(text='invalid message')
         )
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text='save image')
-    )
+    message_content = line_bot_api.get_message_content(event.message.id)
+    with tempfile.NamedTemporaryFile(prefix=ext + '-', delete=True) as tf:
+        for chunk in message_content.iter_content():
+            tf.write(chunk)
+
+        upload_result = upload(tf.name)
+
+        if "error" in upload_result:
+            error_text = 'invalid image'
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=error_text)
+            )
+            return
+
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='save image')
+        )
