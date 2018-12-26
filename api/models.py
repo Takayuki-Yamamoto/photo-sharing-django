@@ -1,3 +1,9 @@
 from django.db import models
 
-# Create your models here.
+
+class PhotoUrl(models.Model):
+    url = models.URLField()
+    created_at = models.DateTimeField(auto_created=True)
+
+    def __str__(self):
+        return self.url
