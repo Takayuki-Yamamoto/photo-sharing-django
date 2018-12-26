@@ -4,8 +4,8 @@ from . import models as md
 
 
 class PhotoUrlModelAdmin(admin.ModelAdmin):
-    list_display = ('id', 'uri', 'created_at',)
-    ordering = ('id',)
+    list_display = ('uri', 'created_at',)
+    ordering = ('created_at',)
 
 
 admin.site.register(md.PhotoUrl, PhotoUrlModelAdmin)
