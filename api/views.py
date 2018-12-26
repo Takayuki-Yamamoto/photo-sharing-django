@@ -55,7 +55,7 @@ def handle_content_message(event):
         for chunk in message_content.iter_content():
             tf.write(chunk)
 
-        upload_result = upload(tf.name, public_id='photo-sharing')
+        upload_result = upload(tf.name)
 
         if "error" in upload_result:
             error_text = 'invalid image'
@@ -67,7 +67,7 @@ def handle_content_message(event):
 
         url, options = cloudinary_url(upload_result['public_id'], format=ext,
                                       crop='fill', width=100, height=100)
-        print(url)
+
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='save image')
