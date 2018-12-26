@@ -35,6 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
+    'cloudinary_storage',
+    'api',
 ]
 
 # TODO csrfでリプライを返せるようにする
@@ -121,3 +124,9 @@ STATIC_URL = '/static/'
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=400)
 DATABASES['default'].update(db_from_env)
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ['CLOUD_NAME'],
+    'API_KEY': os.environ['CLOUD_KEY'],
+    'API_SECRET': os.environ['CLOUD_SECRET'],
+}
