@@ -3,7 +3,8 @@ from django.http import HttpResponse, HttpResponseForbidden
 
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from linebot.models import (MessageEvent, TextMessage, TextSendMessage,
+                            ImageMessage, )
 
 CHANNEL_ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
 LINE_ACCESS_SECRET = os.environ["CHANNEL_SECRET"]
@@ -28,9 +29,25 @@ def callback(request):
     return HttpResponse('OK', status=200)
 
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
+# @handler.add(MessageEvent, message=TextMessage)
+# def handle_message(event):
+#     line_bot_api.reply_message(
+#         event.reply_token,
+#         TextSendMessage(text='reply_message')
+#     )
+
+
+@handler.add(MessageEvent, message=[ImageMessage, TextMessage])
+def handle_content_message(event):
+    if isinstance(event.message, ImageMessage):
+        ext = 'jpg'
+    else:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='invalid message')
+        )
+
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text='reply_message')
+        TextSendMessage(text='save image')
     )
