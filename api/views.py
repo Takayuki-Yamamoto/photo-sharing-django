@@ -7,6 +7,7 @@ from linebot.models import (MessageEvent, TextMessage, TextSendMessage,
                             ImageMessage, )
 
 from cloudinary.uploader import upload
+from cloudinary.utils import cloudinary_url
 
 CHANNEL_ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
 LINE_ACCESS_SECRET = os.environ["CHANNEL_SECRET"]
@@ -54,7 +55,7 @@ def handle_content_message(event):
         for chunk in message_content.iter_content():
             tf.write(chunk)
 
-        upload_result = upload(tf.name)
+        upload_result = upload(tf.name, public_id='photo-sharing')
 
         if "error" in upload_result:
             error_text = 'invalid image'
@@ -64,6 +65,9 @@ def handle_content_message(event):
             )
             return
 
+        url, options = cloudinary_url(upload_result['public_id'], format=ext,
+                                      crop='fill', width=100, height=100)
+        print(url)
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='save image')
