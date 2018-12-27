@@ -51,13 +51,14 @@ def handle_content_message(event):
             event.reply_token,
             TextSendMessage(text='invalid message')
         )
+        return
 
     message_content = line_bot_api.get_message_content(event.message.id)
     with tempfile.NamedTemporaryFile(prefix=ext + '-', delete=True) as tf:
         for chunk in message_content.iter_content():
             tf.write(chunk)
 
-        upload_result = upload(tf.name)
+        upload_result = upload(tf.name, type="private")
 
         if "error" in upload_result:
             error_text = 'invalid image'
