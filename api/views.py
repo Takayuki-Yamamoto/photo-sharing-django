@@ -7,7 +7,7 @@ from linebot.models import (MessageEvent, TextMessage, TextSendMessage,
                             ImageMessage, )
 
 from cloudinary.uploader import upload
-from cloudinary.utils import cloudinary_url
+from cloudinary.utils import cloudinary_url, private_download_url
 
 from .models import PhotoUrl
 
@@ -68,8 +68,9 @@ def handle_content_message(event):
             )
             return
 
-        url, options = cloudinary_url(upload_result['public_id'], format=ext,
-                                      crop='fill', width=100, height=100)
+        url, options = private_download_url(upload_result['public_id'], format=ext)
+        # url, options = cloudinary_url(upload_result['public_id'], format=ext,
+        #                               crop='fill', width=100, height=100)
 
         PhotoUrl.objects.create(url=url)
 
