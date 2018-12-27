@@ -68,7 +68,7 @@ def handle_content_message(event):
             )
             return
 
-        url, options = private_download_url(upload_result['public_id'], format=ext)
+        url = private_download_url(upload_result['public_id'], format=ext)
         # url, options = cloudinary_url(upload_result['public_id'], format=ext,
         #                               crop='fill', width=100, height=100)
 
