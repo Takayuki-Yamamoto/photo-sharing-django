@@ -31,16 +31,16 @@ def callback(request):
     return HttpResponse('OK', status=200)
 
 
-# @handler.add(MessageEvent, message=TextMessage)
-# def handle_message(event):
-#     line_bot_api.reply_message(
-#         event.reply_token,
-#         TextSendMessage(text='reply_message')
-#     )
+@handler.add(MessageEvent, message=TextMessage)
+def handle_text_message(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text='reply_message')
+    )
 
 
-@handler.add(MessageEvent, message=[ImageMessage, TextMessage])
-def handle_content_message(event):
+@handler.add(MessageEvent, message=[ImageMessage])
+def handle_image_message(event):
     if isinstance(event.message, ImageMessage):
         ext = 'jpg'
     else:
