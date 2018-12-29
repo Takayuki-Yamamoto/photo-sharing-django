@@ -50,18 +50,8 @@ def handle_image_message(event):
         for chunk in message_content.iter_content():
             tf.write(chunk)
 
-        image = upload_image(tf.name, type="private")
-
-        # if "error" in upload_result:
-        #     error_text = 'invalid image'
-        #     line_bot_api.reply_message(
-        #         event.reply_token,
-        #         TextSendMessage(text=error_text)
-        #     )
-        #     return
-
+        image = upload_image(tf.name)
         Photo.objects.create(image=image)
-        # private_download_url(upload_result['public_id'], format=ext)
 
         line_bot_api.reply_message(
             event.reply_token,
