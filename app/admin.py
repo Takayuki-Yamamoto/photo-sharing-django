@@ -3,9 +3,9 @@ from django.contrib import admin
 from . import models as md
 
 
-class PhotoUrlModelAdmin(admin.ModelAdmin):
-    list_display = ('cloud_id', 'created_at',)
+class PhotoModelAdmin(admin.ModelAdmin):
+    list_display = ('image', 'created_at',)
     ordering = ('created_at',)
 
 
-admin.site.register(md.PhotoUrl, PhotoUrlModelAdmin)
+admin.site.register(md.Photo, PhotoModelAdmin)

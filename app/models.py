@@ -2,9 +2,16 @@ from django.db import models
 
 from datetime import datetime
 
-class PhotoUrl(models.Model):
-    cloud_id =models.CharField(verbose_name='cloud_id', max_length=128)
+from cloudinary.models import CloudinaryField
+
+
+class Photo(models.Model):
+    image = CloudinaryField('image')
     created_at = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
-        return self.cloud_id
+        try:
+            public_id = self.image.public_id
+        except AttributeError:
+            public_id = ''
+        return "Photo <%s>" % public_id
