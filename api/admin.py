@@ -4,7 +4,7 @@ from . import models as md
 
 
 class PhotoUrlModelAdmin(admin.ModelAdmin):
-    list_display = ('url', 'created_at',)
+    list_display = ('cloud_id', 'created_at',)
     ordering = ('created_at',)
 
 
