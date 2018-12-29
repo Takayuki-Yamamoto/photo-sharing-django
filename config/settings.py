@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'cloudinary_storage',
-    'api',
+    'app',
 ]
 
 # TODO csrfでリプライを返せるようにする

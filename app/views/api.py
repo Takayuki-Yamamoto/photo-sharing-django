@@ -9,14 +9,10 @@ from linebot.models import (MessageEvent, TextMessage, TextSendMessage,
 from cloudinary.uploader import upload
 # from cloudinary.utils import cloudinary_url, private_download_url
 from config.settings import CHANNEL_ACCESS_TOKEN, LINE_ACCESS_SECRET
-from .models import PhotoUrl
+from app.models import PhotoUrl
 
 line_bot_api = LineBotApi(channel_access_token=CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(channel_secret=LINE_ACCESS_SECRET)
-
-
-def index(request):
-    return HttpResponse("This is photo sharing api.")
 
 
 def callback(request):
