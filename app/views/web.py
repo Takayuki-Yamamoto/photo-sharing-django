@@ -7,3 +7,4 @@ from app.models import Photo
 class PhotoListView(LoginRequiredMixin, ListView):
     model = Photo
     template_name = 'html/app/index.html'
+    queryset = Photo.objects.order_by('created_at').reverse().all()
