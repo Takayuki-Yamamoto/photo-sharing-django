@@ -118,6 +118,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+LOGIN_URL='/admin/login/'
+LOGOUT_REDIRECT_URL='/'
+
 if DOTENV:
     SECRET_KEY = os.getenv('SECRET_KEY')
     DEBUG = os.getenv('DEBUG')
