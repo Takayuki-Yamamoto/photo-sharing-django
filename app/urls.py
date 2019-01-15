@@ -4,6 +4,6 @@ from .views import api, web
 
 app_name='app'
 urlpatterns = [
-    path('', web.PhotoListView.as_view(), name="index"),
+    path('', web.TimeLineView.as_view(), name="timeline"),
     path('callback', api.callback, name="callback"),
 ]
