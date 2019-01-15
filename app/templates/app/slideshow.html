@@ -3,6 +3,11 @@
 
 {% block title %}- slideshow{% endblock %}
 
+{% block extra_css %}
+  {% load static %}
+  <link href="{% static 'app/slideshow.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
   <div id="slideshow" class="slideshow">
     {% for photo in photo_list %}
@@ -13,7 +18,7 @@
 
 {% block extra_script %}
   <script type='text/javascript'>
-      $(window).load(function () {
+      $(function () {
           var img = $("#slideshow").children("img"), // 画像を取得
               num = img.length, // 画像の数を数える
               count = 0, // 現在何枚目を表示しているかのカウンター

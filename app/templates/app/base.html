@@ -13,7 +13,7 @@
   <title>photo-sharing {% block title %}{% endblock %}</title>
 
   {% bootstrap_css %}
-  <link href="{% static 'app/css/slideshow.css' %}" rel="stylesheet">
+  {% block extra_css %}{% endblock %}
 </head>
 
 <body>
@@ -49,8 +49,8 @@
   {% block content %}{% endblock %}
 </main>
 
-{% block extra_script %}{% endblock %}
 {% bootstrap_javascript jquery=True %}
+{% block extra_script %}{% endblock %}
 {{ form.media }}
 </body>
 </html>
