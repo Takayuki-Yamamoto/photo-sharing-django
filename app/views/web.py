@@ -6,5 +6,11 @@ from app.models import Photo
 
 class TimeLineView(LoginRequiredMixin, ListView):
     model = Photo
-    template_name = 'html/app/timeline.html'
+    template_name = 'app/timeline.html'
+    queryset = Photo.objects.order_by('created_at').reverse().all()
+
+
+class SlideShowView(LoginRequiredMixin, ListView):
+    model = Photo
+    template_name = 'app/slideshow.html'
     queryset = Photo.objects.order_by('created_at').reverse().all()

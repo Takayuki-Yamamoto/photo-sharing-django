@@ -1,0 +1,18 @@
+.slideshow {
+    position: relative;
+    width: 640px; /* 画像の横幅 */
+    height: 480px; /* 画像の縦幅 */
+}
+
+.slideshow img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transition: 1s; /* フェードの時間(秒) */
+}
+
+.slideshow .show {
+    opacity: 1;
+    z-index: 1;
+}
