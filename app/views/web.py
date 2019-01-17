@@ -8,9 +8,6 @@ class TimeLineView(LoginRequiredMixin, ListView):
     model = Photo
     template_name = 'app/timeline.html'
     queryset = Photo.objects.order_by('created_at').reverse().all()
-    print("***********************************")
-    print(dir(queryset[0].image.metadata))
-
 
 
 class SlideShowView(LoginRequiredMixin, ListView):
