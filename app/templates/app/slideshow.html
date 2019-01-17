@@ -12,7 +12,7 @@
 {% block content %}
   <div id="slideshow" class="slideshow">
     {% for photo in photo_list %}
-      {% cloudinary photo.image width=300 height=300 crop="scale" %}
+      {% cloudinary photo.image width=640 height=480 crop="scale" %}
     {% endfor %}
   </div>
 {% endblock %}
