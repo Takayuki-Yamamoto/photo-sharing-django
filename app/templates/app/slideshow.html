@@ -11,7 +11,7 @@
 {% block content %}
   <div id="slideshow" class="slideshow">
     {% for photo in photo_list %}
-      <img src={{ photo.image.url }} alt={{ photo.public_id }}>
+      <img class="image" src={{ photo.image.url }} alt={{ photo.public_id }}>
     {% endfor %}
   </div>
 {% endblock %}
@@ -25,6 +25,12 @@
               interval = 5000; // 次の画像に切り替わるまでの時間(1/1000秒)
 
           img.eq(0).addClass("show"); // 最初の画像にshowクラス付与
+
+          var c = document.getElementsByClassName('image');
+          for(var i = 0; i<c.length;i++) {
+            c[i].style.width = "100px";
+            c[i].style.height = "100px";
+          }
 
           setTimeout(slide, interval); // slide関数をタイマーセット
 
