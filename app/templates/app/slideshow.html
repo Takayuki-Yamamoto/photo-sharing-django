@@ -11,9 +11,11 @@
 
 {% block content %}
   <div id="slideshow" class="slideshow">
-    {% for photo in photo_list %}
-      {% cloudinary photo.image width=100 height=100 crop="fill" %}
-    {% endfor %}
+    <div class="col-md-12">
+      {% for photo in photo_list %}
+        {% cloudinary photo.image width=100 height=100 crop="fill" %}
+      {% endfor %}
+    </div>
   </div>
 {% endblock %}
 
