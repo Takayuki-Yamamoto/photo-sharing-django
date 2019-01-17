@@ -11,7 +11,7 @@
         {% for photo in photo_list %}
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-              {% cloudinary photo.image width=300 height=300 crop="scale" %}
+              {% cloudinary photo.image height=300 crop="scale" %}
             </div>
           </div>
         {% endfor %}
