@@ -21,24 +21,18 @@
 {% block extra_script %}
   <script type='text/javascript'>
       $(function () {
-          var img = $("#slideshow").children("img"), // 画像を取得
-              num = img.length, // 画像の数を数える
-              count = 0, // 現在何枚目を表示しているかのカウンター
-              interval = 2000; // 次の画像に切り替わるまでの時間(1/1000秒)
+          var img = $("#slideshow").children("img"),
+              num = img.length,
+              count = 0,
+              interval = 10000;
 
-          img.eq(0).addClass("show"); // 最初の画像にshowクラス付与
+          img.eq(0).addClass("show");
 
           var images = document.getElementsByClassName('image');
-          {#for(var i = 0; i<c.length;i++) {#}
-          {#  c[i].style.width = "100px";#}
-          {#  c[i].style.height = "100px";#}
-          {#}#}
+
           for (var i = 0; i < images.length; i++) {
               var w = images[i].clientWidth;
               var h = images[i].clientHeight;
-
-              console.log(w);
-              console.log(h);
 
               var width_ratio = window.innerWidth / w;
               var height_ratio = window.innerHeight / h;
@@ -47,16 +41,16 @@
               images[i].style.height = h * min_ratio;
           }
 
-          setTimeout(slide, interval); // slide関数をタイマーセット
+          setTimeout(slide, interval);
 
           function slide() {
-              img.eq(count).removeClass("show"); // 現在表示している画像からshowクラスを取り除く
-              count++; // カウンターを一個進める
+              img.eq(count).removeClass("show");
+              count++;
               if (count >= num) {
-                  count = 0; // カウンターが画像の数より大きければリセット
+                  count = 0;
               }
-              img.eq(count).addClass("show"); // 次の画像にshowクラス付与
-              setTimeout(slide, interval); // 再びタイマーセット
+              img.eq(count).addClass("show");
+              setTimeout(slide, interval);
           }
       });
   </script>
