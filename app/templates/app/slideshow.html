@@ -20,7 +20,12 @@
 {% block extra_script %}
   <script type="text/javascript">
     var cl = $.cloudinary.responsive();
-    console(cl);
+    for(var i=0; i<cl.length; i++) {
+
+      console(cl[i].width);
+      console(cl[i].height);
+    }
+
   </script>
 
 
