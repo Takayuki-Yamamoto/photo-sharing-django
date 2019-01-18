@@ -47,7 +47,7 @@
               img.eq(count).removeClass("show");
               count++;
               if (count >= num) {
-                  count = 0;
+                  location.reload(true);
               }
               img.eq(count).addClass("show");
               setTimeout(slide, interval);
