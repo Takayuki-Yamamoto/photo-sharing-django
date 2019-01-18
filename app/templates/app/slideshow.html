@@ -18,6 +18,12 @@
 {% endblock %}
 
 {% block extra_script %}
+  <script type="text/javascript">
+    var cl = $.cloudinary.responsive();
+    console(cl);
+  </script>
+
+
   <script type='text/javascript'>
       $(function () {
           var img = $("#slideshow").children("img"), // 画像を取得
