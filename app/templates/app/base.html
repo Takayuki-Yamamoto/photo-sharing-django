@@ -14,48 +14,44 @@
   <title>photo-sharing {% block title %}{% endblock %}</title>
 
   {% bootstrap_css %}
-  <link href="{% static 'app/base.css' %}" rel="stylesheet">
+  <link href="{% static 'app/css/base.css' %}" rel="stylesheet">
   {% block extra_css %}{% endblock %}
 </head>
 
 <body>
-<header>
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="{% url 'app:timeline' %}">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-           viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-           class="mr-2">
-        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-        <circle cx="12" cy="13" r="4"></circle>
-      </svg>
-      <strong>photo-sharing</strong>
-    </a>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="{% url 'app:timeline' %}">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+         class="mr-2">
+      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+      <circle cx="12" cy="13" r="4"></circle>
+    </svg>
+    <strong>photo-sharing</strong>
+  </a>
 
-    <div class="collapse navbar-collapse" id="navbarsLmManagement">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown active">
-          <a class="nav-link dropdown-toggle" href="#"
-             id="ledger" data-toggle="dropdown" aria-haspopup="true"
-             aria-expanded="false">モード</a>
-          <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="{% url 'app:timeline' %}">
-              タイムライン
-            </a>
-            <a class="dropdown-item" href="{% url 'app:slideshow' %}">
-              スライドショー
-            </a>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</header>
+  <div class="collapse navbar-collapse" id="navbarsLmManagement">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" href="#"
+           id="ledger" data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false">モード</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="{% url 'app:timeline' %}">
+            タイムライン
+          </a>
+          <a class="dropdown-item" href="{% url 'app:slideshow' %}">
+            スライドショー
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-<main role="main" class="container margin-header">
-  {% bootstrap_messages %}
-  {% block content %}{% endblock %}
-</main>
+{% bootstrap_messages %}
+{% block content %}{% endblock %}
 
 {% bootstrap_javascript jquery=True %}
 {% cloudinary_includes %}

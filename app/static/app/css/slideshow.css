@@ -1,7 +1,7 @@
 .slideshow {
-    position: relative;
-    width: 640px; /* 画像の横幅 */
-    height: 480px; /* 画像の縦幅 */
+    position: absolute;
+    width: 100%; /* 画像の横幅 */
+    height: 100%; /* 画像の縦幅 */
 }
 
 .slideshow img {

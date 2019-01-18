@@ -6,14 +6,13 @@
 {% block extra_css %}
   {% load static %}
   {% load cloudinary %}
-  <link href="{% static 'app/slideshow.css' %}" rel="stylesheet">
+  <link href="{% static 'app/css/slideshow.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
   <div id="slideshow" class="slideshow">
     {% for photo in photo_list %}
-      <img class="image" src={{ photo.image.url }} alt={{ photo.public_id }}>
-{#      {% cloudinary photo.image width="auto" height="auto" responsive="true" crop="scale" %}#}
+      {% cloudinary photo.image class="image col-sm-12" %}
     {% endfor %}
   </div>
 {% endblock %}
@@ -34,8 +33,8 @@
               var w = images[i].clientWidth;
               var h = images[i].clientHeight;
 
-              var width_ratio = window.innerWidth / w;
-              var height_ratio = window.innerHeight / h;
+              var width_ratio = document.body.clientWidth / w;
+              var height_ratio = document.body.clientHeight / h;
               var min_ratio = Math.min(width_ratio, height_ratio);
               images[i].style.width = w * min_ratio;
               images[i].style.height = h * min_ratio;
