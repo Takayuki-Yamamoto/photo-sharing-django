@@ -1,57 +1,63 @@
 {% extends 'app/base.html' %}
 {% load bootstrap4 %}
-{% load cloudinary %}
 
 {% block title %}- slideshow{% endblock %}
 
 {% block extra_css %}
   {% load static %}
+  {% load cloudinary %}
   <link href="{% static 'app/slideshow.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
   <div id="slideshow" class="slideshow">
     {% for photo in photo_list %}
-      {% cloudinary photo.image width="auto" height="auto" responsive="true" crop="scale" respond_placeholder="blank" %}
+      <img class="image" src={{ photo.image.url }} alt={{ photo.public_id }}>
+{#      {% cloudinary photo.image width="auto" height="auto" responsive="true" crop="scale" %}#}
     {% endfor %}
   </div>
 {% endblock %}
 
 {% block extra_script %}
-  <script type="text/javascript">
-      $(function () {
-          $.cloudinary.config({cloud_name: "hlkvdfgza"});
-          $.cloudinary.responsive();
-      });
-  </script>
-
-
   <script type='text/javascript'>
       $(function () {
           var img = $("#slideshow").children("img"), // 画像を取得
               num = img.length, // 画像の数を数える
               count = 0, // 現在何枚目を表示しているかのカウンター
-              interval = 5000; // 次の画像に切り替わるまでの時間(1/1000秒)
+              interval = 2000; // 次の画像に切り替わるまでの時間(1/1000秒)
 
           img.eq(0).addClass("show"); // 最初の画像にshowクラス付与
 
-          {#var c = document.getElementsByClassName('image');#}
+          var images = document.getElementsByClassName('image');
           {#for(var i = 0; i<c.length;i++) {#}
           {#  c[i].style.width = "100px";#}
           {#  c[i].style.height = "100px";#}
           {#}#}
+          for (var i = 0; i < images.length; i++) {
+              var w = images[i].clientWidth;
+              var h = images[i].clientHeight;
 
-          {#setTimeout(slide, interval); // slide関数をタイマーセット#}
+              console.log(w);
+              console.log(h);
 
-          {#function slide() {#}
-          {#    img.eq(count).removeClass("show"); // 現在表示している画像からshowクラスを取り除く#}
-          {#    count++; // カウンターを一個進める#}
-          {#    if (count >= num) {#}
-          {#        count = 0; // カウンターが画像の数より大きければリセット#}
-          {#    }#}
-          {#    img.eq(count).addClass("show"); // 次の画像にshowクラス付与#}
-          {#    setTimeout(slide, interval); // 再びタイマーセット#}
-          {#}#}
+              var width_ratio = window.innerWidth / w;
+              var height_ratio = window.innerHeight / h;
+              var min_ratio = Math.min(width_ratio, height_ratio);
+              images[i].style.width = w * min_ratio;
+              images[i].style.height = h * min_ratio;
+          }
+
+          setTimeout(slide, interval); // slide関数をタイマーセット
+
+          function slide() {
+              img.eq(count).removeClass("show"); // 現在表示している画像からshowクラスを取り除く
+              count++; // カウンターを一個進める
+              if (count >= num) {
+                  count = 0; // カウンターが画像の数より大きければリセット
+              }
+              img.eq(count).addClass("show"); // 次の画像にshowクラス付与
+              setTimeout(slide, interval); // 再びタイマーセット
+          }
       });
   </script>
 {% endblock %}
