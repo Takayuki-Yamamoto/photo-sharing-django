@@ -10,9 +10,9 @@
       <div class="row">
         {% for photo in photo_list %}
           <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
+            <a class="card mb-4 shadow-sm" href="{{ photo.image.url }}">
               {% cloudinary photo.image height=300 crop="scale" %}
-            </div>
+            </a>
           </div>
         {% endfor %}
       </div>
